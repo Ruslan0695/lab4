@@ -9,19 +9,19 @@ on:
 
 jobs:
   testing:
-
+  
     runs-on: ubuntu-latest
     steps:
-
+    
     - name: user
       uses: actions/checkout@v1 
-
-    - name: dir_check
-      run: ls -la
       
+    - name: dir_check  
+      run: ls -la
+        
     - name: set_compiler
       run: sudo apt install clang-11 g++ cmake
-
+      
     - name: formatter_lib
       run: | 
           cd formatter_lib 
@@ -29,14 +29,21 @@ jobs:
           cmake --build .
           cd ..
           
-    - name: hello_world
+    - name: formatter_ex_lib
+      run: | 
+          cd formatter_ex_lib 
+          cmake . -DCMAKE_CXX_COMPILER=clang++
+          cmake --build .
+          cd ..
+    
+    - name: hello_check
       run: | 
           cd hello_world_application
           cmake . -DCMAKE_CXX_COMPILER=clang++
           cmake --build .
           cd ..
-          
-    - name: solver_application
+      
+    - name: solver_check
       run: | 
           cd solver_application
           cmake . -DCMAKE_CXX_COMPILER=clang++
